@@ -1,0 +1,21 @@
+1. Power:
+
+ public static long power(int base,int n,int m)
+    {
+        int ans=1;
+        while(n!=0)
+        {
+            if(n%2==1)
+            {
+                ans = (ans * base)%m;
+                n--;
+            }
+            else
+            {
+                n /= 2;
+                base = (base * base)%m;
+            }
+        }
+        return ans;
+    }
+---------------------------------------------------------->
