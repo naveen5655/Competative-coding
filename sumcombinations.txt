@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+void sumcombination(ll n,vector<int> &vec)
+{
+    
+    if(n==0)
+    {
+        for(auto it: vec)
+        cout<<it<<" ";
+        cout<<"\n";
+    }
+    for(ll i=1;i<=n;i++)
+    {
+        vec.push_back(i);
+        sumcombination(n-i,vec);
+        vec.pop_back();
+    }
+}
+int main()
+{
+    ll n;
+    cin>>n;
+    vector<int> vec;
+    sumcombination(n,vec);
+    return 0;
+}
