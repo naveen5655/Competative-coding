@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll m = (ll)1e9+7;
+ll f[1000005];
+// Driver code
+int main ()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  ll t;
+  cin>>t;
+  f[0] = 0;
+  f[1] = 1;
+  for(ll i = 2; i <= 1000000;i++)
+  {
+    f[i] = (f[i - 1]%m + f[i - 2]%m)%m;
+  }
+  while(t--)
+  {
+    ll n;
+    cin>>n;
+    cout<< (f[n])<<"\n";
+  }
+}
