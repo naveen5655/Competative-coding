@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll a[1000005];
+ll dp[1000005]; 
+ll n,k;
+ll func(ll ind)
+{
+	if(ind==(n-1))
+		return 0;
+	else if(dp[ind]!=-1) return dp[ind];
+	else
+	{
+		ll ans = 1e9+5; 
+		for(ll i = 1;i<=k;i++)
+		{
+			if(ind+i<n)
+				ans = min(ans,abs(a[ind+i]-a[ind]) + func(ind+i));
+ 
+		}
+		return dp[ind] = ans; 
+	}
+ 
+}
+int main(){
+    cin >> n >> k;
+    for(ll i=0;i<n;i++)
+    {
+      cin >> a[i]; 
+      dp[i]=-1;
+    }
+    cout << func(0); 
+ 
+}
