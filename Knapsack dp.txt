@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll n,W,val[101],wt[101];
+ll dp[101][100005];
+ll knapsack(ll index,ll w)
+{
+    if(index==n)
+     return 0;
+    if(dp[index][w]!=-1)
+     return dp[index][w];
+     ll ans = INT_MIN;
+    //Pick element
+    if(wt[index]+w<=W)
+       ans = max(ans,val[index]+knapsack(index+1,w+wt[index]));
+    // not-pick
+    ans = max(ans,knapsack(index+1,w));
+    return dp[index][w]= ans;
+}
+int main()
+{
+    ll index=0,w=0;
+    cin>>n>>W;
+    memset(dp, -1, sizeof(dp));
+    for(ll i=0;i<n;i++)
+    {
+        cin>>wt[i]>>val[i];
+    }
+    cout<<knapsack(index,w)<<"\n";
+    return 0;
+}
