@@ -1,0 +1,14 @@
+int maxSubArray(vector<int>& nums) {
+        int s = 0;
+        int maxi = nums[0];
+        for(auto i:nums)
+        {
+           s += i;
+          maxi = max(s,maxi);
+
+           if(s < 0)
+               s = 0;
+            
+        }
+        return maxi;
+    }
