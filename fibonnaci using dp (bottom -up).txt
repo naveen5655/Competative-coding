@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n <=1)
+            return n;
+        int previous_firstnum = 1;
+        int previous_secondnum=0;
+        for(int i=2;i<=n;i++)
+        {
+           int currentValue = previous_firstnum + previous_secondnum;
+           previous_secondnum = previous_firstnum;
+            previous_firstnum = currentValue;
+            
+        }
+        return previous_firstnum;
+    }
+};
