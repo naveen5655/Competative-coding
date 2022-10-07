@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool cowCondition(vector<ll> &v,ll cows,ll mid)
+{
+    ll n = v.size();
+    ll cow_ind = v[0]; // intial cow position 
+    ll count_cows = 1 ;// initial cow at v[0] 
+    for(ll i=1;i<n;i++)
+    {
+        if(v[i]-cow_ind >= mid)
+        {
+            cow_ind = v[i]; // new cow position
+            count_cows++;
+        }
+        if(count_cows == cows)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+void solveCows(vector<ll> &v, ll cows)
+{
+    ll n = v.size();
+    ll ans = 1; // first cow placed initial
+    ll low = 1, high = v[n-1]-v[0],mid ;
+    while(low <= high)
+    {
+        mid = low + ((high - low)>> 1);
+        if(cowCondition(v,cows,mid))
+        {
+            ans = mid ;
+            low = mid + 1 ; // find max value
+            
+        }
+        else
+         high = mid - 1;
+    }
+    cout<<ans<<"\n";
+}
+int main()
+{
+    ios_base::sync_with_stdio(0); // fast i/o
+    cin.tie(0);
+    cout.tie(0);
+    ll testcases;
+    cin>>testcases;
+    while(testcases--)
+    {
+        ll n,cows;
+        cin>>n>>cows;
+        vector<ll> v(n);
+        for(ll i=0;i<n;i++)
+         cin>>v[i];
+        sort(v.begin(), v.end());
+        solveCows(v,cows);
+        
+    }
+}
