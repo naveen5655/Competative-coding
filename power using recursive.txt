@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll mod = (ll) 1e9+7;
+ll solve(ll a,ll b)
+{
+    if(b==0)
+     return 1;
+    ll ans = solve(a,(b>>1));
+    if(b & 1)
+     return ((ans * ans)%mod * a)%mod;
+    else
+     return (ans*ans)%mod;
+}
+int main()
+{
+    ll a,b;
+    cin>>a>>b;
+    cout<<solve(a,b)%mod;
+    return 0;
+}
