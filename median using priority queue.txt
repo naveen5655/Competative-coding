@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll mod = (ll) 1e9+7;
+//#define pair<ll,ll> pll 
+void solve(vector<ll> &v)
+{
+    ll n = v.size();
+    priority_queue<ll> pql;
+    priority_queue<ll,vector<ll>,greater<ll>> pqr;
+    double ans = 0.0;
+    for(auto x:v)
+    {
+        if(x < ans)
+        {
+            if(pql.size() > pqr.size()){
+              pqr.push(pql.top()); pql.pop();}
+            pql.push(x);
+        }
+        else
+        {
+            if(pql.size() < pqr.size()){
+              pql.push(pqr.top()); pqr.pop();}
+            pqr.push(x);
+        }
+        
+       if(pql.size() == pqr.size())
+         ans = (pql.top()+pqr.top())/2.00;
+        else if(pql.size() > pqr.size())
+          ans = pql.top();
+        else
+         ans = pqr.top();
+        cout<<fixed<<setprecision(2)<<ans<<" ";
+    }
+    cout<<"\n";
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll testcases;
+    cin>>testcases;
+    while(testcases--)
+    {
+        ll n;
+        cin>>n;
+        vector<ll> v(n);
+        for(ll i=0;i<n;i++)
+         cin>>v[i];
+        solve(v);
+    }
+}
