@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define long long int 
+void maxHeapifyShiftDown(int v[], int n, int idx){
+    int curr =  idx;
+    while(curr<n)
+    {
+        int mx = curr;
+        int r = (2 * curr) + 2;
+        int l = (2 * curr )+ 1;
+        if( r< n &&  v[r] > v[mx])
+         mx = r;
+        if(l < n && v[l] > v[mx] )
+         mx = l;
+        if(curr==mx)
+         break;
+        swap(v[mx],v[curr]);
+         curr = mx;
+    }
+}
+void buildMaxHeap(int v[], int n){
+    for(int i=(n>>1)-1;i>=0;i--)
+    {
+        maxHeapifyShiftDown(v,n,i);
+    }
+}
+void heapsortArray(int *v, int n){
+    // TODO: Your Code Here
+    buildMaxHeap(v,n);
+    for(int i=n-1;i>0;i--)
+    {
+        swap(v[0],v[i]);
+         maxHeapifyShiftDown(v,i,0);
+    }
+    
+    
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+    cin>>n>>k;
+    //vector<int> v(n);
+    int v[n+1];
+    for(int i=0;i<n;i++)
+     cin>>v[i];
+    heapsortArray(v,n);
+     cout<<v[n-k]<<"\n";
+     
+    }
+    
+    
+}
