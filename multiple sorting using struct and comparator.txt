@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll mod = (ll) 1e9+7;
+#define pb push_back 
+#define vl vector<ll>
+#define vll vector<vector<ll>> 
+struct Student
+{
+   string s;
+   ll score;
+};
+bool cmp(Student &s1,Student &s2)
+{
+    if(s1.score > s2.score)
+     return true;
+    else if(s1.score < s2.score)
+     return false;
+    else
+    {
+        if(s1.s < s2.s)
+         return true;
+        return false;
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll n;
+    cin>>n;
+    vector<Student> v(n);
+    string s;
+    ll score;
+    for(ll i=0;i<n;i++)
+    {
+        cin>>s>>score;
+        v[i] = {s,score};
+    }
+    sort(v.begin(),v.end(),cmp);
+    for(Student i:v)
+    {
+        cout<<i.s<<" "<<i.score<<" \n";
+    }
+    
+}
