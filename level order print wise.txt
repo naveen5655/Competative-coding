@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct BSTNode{
+	int val;
+	BSTNode *left, *right;
+	BSTNode(int val){
+		this->val = val;
+		this->left = this->right = NULL;
+	}
+};
+
+vector< vector<int> > levelOrder(BSTNode *root)
+{
+    // TODO:  Just complete given function
+	// Each level should be filled as a separate row in returned vector of vector
+	queue<BSTNode * > q;
+	vector<vector<int>> ans;
+	q.push(root);
+	while(!q.empty())
+	{
+	    vector<int> v;
+	    int n = q.size();
+	    while(n--)
+	    {
+	        BSTNode *x = q.front();
+	        q.pop();
+	        v.push_back(x->val);
+	        if(x->left)
+	         q.push(x->left);
+	        if(x->right)
+	         q.push(x->right);
+	    }
+	    ans.push_back(v);
+	}
+	return ans;
+}
