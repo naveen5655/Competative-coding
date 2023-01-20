@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct BTNode{
+	int data;
+	BTNode *left, *right;
+};
+
+void rightView(BTNode *root)
+{
+    // Your Code Here
+    queue<BTNode*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int n = q.size();
+        while(n--){
+        BTNode *x = q.front();
+        if(n==0) // print the last node 
+         cout<<x->data<<" ";
+        q.pop();
+        if (x->left)
+            q.push(x->left);
+        if (x->right)
+            q.push(x->right);
+        }
+        
+    }
+    cout<<"\n";
+}
