@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct NTNode{
+    int data;
+    vector<NTNode *> children;
+};
+void preOrderTraversal(NTNode *root)
+{
+    if(!root)
+     return;
+    cout<<root->data<<" ";
+    for (auto child:root->children) 
+    {
+        preOrderTraversal(child);
+    }
+}
