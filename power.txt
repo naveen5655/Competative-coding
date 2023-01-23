@@ -1,0 +1,18 @@
+ll power(ll base, ll n)
+{
+    ll ans = 1;
+    while(n>0)
+    {
+        if(n & 1)
+        {
+            ans = (ans * base )%mod;
+            n--;
+        }
+        else
+        {
+            n = n >> 1;
+            base = (base * base)%mod;
+        }
+    }
+    return ans;
+}
