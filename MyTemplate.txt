@@ -2,11 +2,11 @@
 using namespace std;
 typedef long long ll;
 ll mod = (ll)1e9+7;
-#define pii pair<ll,ll>
-#define vi vector<ll> 
-#define vii vector<vector<ll>>
 #define maxpq priority_queue<ll>
 #define minpq priority_queue<ll,vector<ll>, greater<ll>>
+#define vi vector<ll> 
+#define vii vector<vector<ll>>
+#define pii pair<ll,ll>
 #define fi first 
 #define se second
 #define pb push_back
@@ -17,6 +17,7 @@ ll mod = (ll)1e9+7;
 #define ub upper_bound
 #define all(x) (x).begin(),(x).end()
 #define allr(x) (x).rbegin(), (x).rend()
+#define setbits(x) __builtin_popcountll(x)
 ll power(ll base, ll n)
 {
     ll ans = 1;
@@ -35,7 +36,7 @@ ll power(ll base, ll n)
     }
     return ans;
 }
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
