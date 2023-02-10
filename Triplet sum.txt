@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define vi vector<ll> 
+bool solve(vi &v, ll target)
+{
+    sort(v.begin(),v.end());
+    ll n = v.size(),ans = 0;
+    for(ll k = 0;k<=(n-3);k++)
+    {
+        ll i = k+1,j=n-1, t = target - v[k];
+        while(i<j)
+        {
+            if(v[i]+v[j] ==t)
+            {
+                return true;
+            }
+            if(v[i]+v[j]<t)
+              i++;
+            else
+             j--;
+        }
+    }
+    return false;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,t;
+        cin>>n>>t;
+        vi v(n);
+        for(ll i=0;i<n;i++)
+        {
+            cin>>v[i];
+        }
+        if(solve(v,t))
+         cout<<"true\n";
+        else
+         cout<<"false\n";
+    }
+    return 0;
+}
