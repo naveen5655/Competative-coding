@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define vi vector<ll>
+void solve(string &s, ll k)
+{
+    ll l=0,e =0,mx=0,cz=0,n=s.length();
+    for(ll e=0;e<n;e++)
+    {
+        ll add = s[e];
+        if(add=='F')
+        cz++;
+        if(cz<=k)
+         mx = max(mx,e-l+1);
+        else
+        {
+            while(l<=e)
+            {
+                ll rem = s[l];
+                if(rem=='F')
+                {
+                    cz--;
+                    l++;
+                    break;
+                }
+                else
+                 l++;
+            }
+        }
+        
+    }
+    cout<<mx<<"\n";
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        ll k;
+        cin>>k;
+        solve(s,k);
+    }
+    return 0;
+}
