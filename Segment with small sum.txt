@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define vi vector<ll>
+void solve(vi &v, ll rs)
+{
+    ll s = v[0];
+    ll n = v.size();
+    ll l=0,r=0,ans=0,c=0;
+    while(r<n)
+    {
+        if(s<=rs)
+        {
+            r++;
+            s += v[r];
+            c = r-l;
+            ans = max(c,ans);
+        }
+        else
+        {
+            s -= v[l];
+            l++;
+        }
+        
+        
+    }
+    cout<<ans<<"\n";
+}
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,rs;
+        cin>>n>>rs;
+        vi v(n);
+        for(ll i=0;i<n;i++)
+        {
+            cin>>v[i];
+        }
+        solve(v,rs);
+    }
+    return 0;
+}
