@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main() {
+	string s ="apple";
+	vector<ll> v(26,0);
+	vector<ll> arr(26,0);
+	for(auto i:s)
+	{
+	    ll idx = i-'a';
+	    v[idx]++;
+	}
+	for(auto i:s)
+	{
+	    ll idx = i-'a';
+	    arr[idx]++;
+	    if(arr[idx]==1){
+	    cout<<i<<"="<<v[idx]<<",";
+	    }
+	}
+	
+	return 0;
+}
