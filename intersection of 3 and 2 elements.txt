@@ -1,0 +1,38 @@
+1. 3 Arrays Interestion:
+----------------------------------------------------------------------->
+class Solution {
+public:
+	vector<int> commonElements(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
+		vector<int> v;
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(),nums2.end());
+		sort(nums3.begin(),nums3.end());
+        int m = nums1.size();
+        int n = nums2.size();
+		int c = nums3.size();
+        int i=0,j=0,k=0;
+       int last = 0;
+        while(i<m && j<n && k<c)
+        {
+			 if(nums1[i]==nums2[j]  &&nums2[j]==nums3[k] && last!=nums1[i])
+            {
+                v.push_back(nums1[i]);
+                 last = nums1[i];
+                i++;
+                j++;
+				k++;
+			}
+          // x < y
+        else if (nums1[i] < nums2[j])
+            i++;
+        // y < z
+        else if (nums2[j] < nums3[k])
+            j++;
+        // We reach here when x > y and z < y, i.e., z is
+        // smallest
+        else
+            k++;
+		}
+			return v;
+       }
+};
