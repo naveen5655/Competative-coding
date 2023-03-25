@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& m) {
+        vector<int> v;
+        int r = m.size();
+        int c = m[0].size();
+        int up =0,down = r-1,left = 0,right = c-1, count = 0;
+        while(count < r*c)
+        {
+             // step1: print first row from left to right
+            for(int i=up,j=left;j<=right;j++)
+            {
+                  v.push_back(m[i][j]); // 1 - 2 - 3 
+                  count++;
+             }
+             up++;
+             if(count>=r*c)
+              break;
+            // step2: print last column from up to down
+            for(int i=up,j=right;i<=down;i++)
+            {
+                v.push_back(m[i][j]);
+                count++;
+            }
+            right--;
+            // step3: print last row from right to left
+            for(int i=down,j=right;j>=left;j--)
+            {
+                v.push_back(m[i][j]);
+                count++;
+            }
+            down--;
+            if(count>=r*c)
+              break;
+            for(int i=down,j=left;i>=up;i--)
+            {
+                v.push_back(m[i][j]);
+                count++;
+            }
+            left++;
+        }
+       return v;
+        
+    }
+};
