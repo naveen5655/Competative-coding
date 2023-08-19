@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+void bfs(vector<int> adj[], int V)
+{
+    vector<int> ans;
+    vector<bool> visited(V,false);
+    visited[0] = true; // start from 0th node
+    ans.push_back(0);
+    queue<int> q;
+    q.push(0);
+    while(!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+        for(auto j:adj[node])
+        {
+            if(visited[j]==false)
+            {
+                visited[j] = true;
+                q.push(j);
+                ans.push_back(j);
+            }
+        }
+    }
+    for(auto i:ans)
+    {
+        cout<<i<<" ";
+    }
+}
+int main()
+{
+    int n,e;
+    cin>>n>>e;
+    vector<int> adj[n];
+    for(int i=0;i<e;i++)
+    {
+        int u,v;
+        cin>>u>>v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    bfs(adj,n);
+}
