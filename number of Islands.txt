@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool isValid(vector<vector<int>> &mat,int x, int y,vector<vector<bool>> &visited)
+{
+    int r = mat.size();
+    int c = mat[0].size();
+    if(x>=0 && x<r && y>=0 && y<c && mat[x][y]==1 && visited[x][y]==false)
+     return true;
+    return false;
+}
+
+void bfs(vector<vector<int>> &mat, vector<vector<bool>> &visited, int i, int j)
+{
+    vector<int> row = {-1,-1,-1,0,0,1,1,1};
+    vector<int> col = {-1,0,1,-1,1,-1,0,1};
+    queue<pair<int,int>> q;
+    q.push({i,j});
+    visited[i][j]=true;
+    while(!q.empty())
+    {
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        for(int k=0;k<8;k++)
+        {
+            int a = x+row[k];
+            int b = y+col[k];
+            if(isValid(mat,a,b,visited))
+            {
+                visited[a][b]=true;
+                q.push({a,b});
+            }
+        }
+    }
+}
+int main() {
+	int r,c;
+	cin>>r>>c;
+	vector<vector<int>> mat(r,vector<int>(c));
+	for(int i=0;i<r;i++)
+	{
+	    for(int j=0;j<c;j++)
+	    {
+	        cin>>mat[i][j];
+	    }
+	}
+	vector<vector<bool>> visited(r,vector<bool> (c,false));
+	int ans = 0;
+	for(int i=0;i<r;i++)
+	{
+	    for(int j=0;j<c;j++)
+	    {
+	        if(mat[i][j]==1 && visited[i][j]==false)
+	        {
+	            bfs(mat,visited,i,j);
+	            ans++;
+	        }
+	    }
+	}
+	cout<<ans<<"\n";
+}
