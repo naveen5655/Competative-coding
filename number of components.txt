@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+void addEdge(vector<ll> adj[], ll u, ll v)
+{
+  adj[u].push_back(v);
+  adj[v].push_back(u);
+}
+void bfs(vector<ll> adj[],vector<bool> &visited,ll u)
+{
+  visited[u]=true;
+  queue<ll> q;
+  q.push(u);
+  while(!q.empty())
+  {
+    ll node = q.front();
+    q.pop();
+    for(auto j:adj[node])
+    {
+      if(visited[j]==false)
+      {
+        visited[j]=true;
+        q.push(j);
+      }
+    }
+  }
+}
+int main()
+{
+  ll t;
+  cin>>t;
+  while(t--)
+  {
+    ll n,e;
+    cin>>n>>e;
+    vector<ll> adj[n];
+    for(ll i=0;i<e;i++)
+    {
+      ll u,v;
+      cin>>u>>v;
+      addEdge(adj,u,v);
+    }
+    int ans = 0;
+    vector<bool> visited(n,false);
+    for(ll i=0;i<n;i++)
+    {
+      if(visited[i]==false)
+      {
+          ans++;
+          bfs(adj,visited,i);
+      }
+    }
+    cout<<ans<<"\n";
+    
+  }
+}
