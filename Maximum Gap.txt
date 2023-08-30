@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        int n = nums.size();
+        if(n==1)
+         return 0;
+        int mx = *max_element(nums.begin(),nums.end());
+        int mn = *min_element(nums.begin(),nums.end());
+        int gap = ceil((double)(mx - mn) / (n - 1));
+        vector<int> bucket_min(n-1,INT_MAX), bucket_max(n-1,INT_MIN);
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]==mx || nums[i]==mn)
+             continue;
+            int idx = (nums[i] - mn) / gap;
+            bucket_min[idx] = min(bucket_min[idx],nums[i]);
+            bucket_max[idx] = max(bucket_max[idx],nums[i]);
+        }
+        int ans = 0;
+        int prev = mn ;
+        for(int i=0;i<n-1;i++)
+        {
+            if(bucket_min[i]==INT_MAX)
+             continue;
+            ans = max(ans,bucket_min[i]-prev);
+            prev = bucket_max[i];
+        }
+        ans = max(ans,mx-prev);
+        return ans;
+    }
+};
