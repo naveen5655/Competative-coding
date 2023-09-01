@@ -1,0 +1,23 @@
+vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        vector<int> dis(V,INT_MAX);
+        queue<int> q;
+        q.push(S);
+        dis[S] = 0;
+        while(!q.empty())
+        {
+            int currnode = q.front();
+            q.pop();
+            for(auto it:adj[currnode])
+            {
+                // distance from source to current node
+                // source to prev node + current weight < infinity
+                if(dis[currnode]+it[1]<dis[it[0]])
+                {
+                    dis[it[0]] = dis[currnode]+it[1];
+                    q.push(it[0]);
+                }
+            }
+        }
+        return dis;
+    }
