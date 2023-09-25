@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int firstOccurance(string &s,char p)
+{
+    int n = s.size();
+    int low = 0, high = n-1,mid;
+    int ans = -1;
+    while(low<=high)
+    {
+        mid  = low + (high-low)/2;
+        if(s[mid]<p)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            if(s[high]==p)
+            {
+                ans = mid;
+            }
+            high = mid - 1;
+        }
+    }
+    return ans;
+}
+int secondOccurrence(string &s, char p) {
+    int n = s.size();
+    int low = 0, high = n - 1, mid;
+    int ans = -1;
+    while (low <= high) {
+        mid = low + (high - low) / 2;
+        if (s[mid] <= p) { // Compare with 'p'
+            if (s[mid] == p) { // Update ans when 'p' is found
+                ans = mid;
+            }
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return ans;
+}
+
+int main()
+{
+    string s;
+    cin>>s;
+    cout<<firstOccurance(s,'p')<<"\n";
+    cout<<secondOccurrence(s,'p')<<"\n";
+}
