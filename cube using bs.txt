@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll cubeR(ll n)
+{
+      ll low=0,high=min(n,1000000LL),mid;
+      while(low<=high)
+      {
+            mid=low+(high-low)/2;
+            if(mid*mid*mid==n)
+                  return mid;
+            else if(mid*mid*mid<n)
+                  low=mid+1;
+            else
+                  high=mid-1;
+      }
+      return mid;
+}
+
+int main() {
+      ll n,t;cin>>t;
+      while(t--)
+      {
+            cin>>n;
+            if (n>0)
+            {
+                cout<<cubeR(n)<<"\n";  
+            }
+            else
+            {
+                cout<<-cubeR(-n)<<"\n";
+            }
+            
+      }
+      return 0;
+}
