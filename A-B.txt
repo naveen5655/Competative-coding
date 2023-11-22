@@ -1,0 +1,35 @@
+#include <vector>
+
+typedef long long ll;
+
+using namespace std;
+
+class BeingZero {
+public:
+    vector<int> solve(int m, vector<int> &a, int n, vector<int> &b) {
+        vector<int> v;
+        int i = 0, j = 0;
+
+        while (i < m && j < n)
+        {
+            if(a[i]<b[j])
+            {
+                v.push_back(a[i++]);
+            }
+            else if(b[j]<a[i])
+             j++;
+            else
+            {
+                i++;
+                j++;
+            }
+           
+        }
+
+        while (i < m) {
+            v.push_back(a[i++]);
+        }
+
+        return v;
+    }
+};
