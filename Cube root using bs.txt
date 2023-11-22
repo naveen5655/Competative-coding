@@ -1,0 +1,27 @@
+class BeingZero{
+	public:
+		long long cubeRoot(long long n)
+		{
+		    bool negative_number = false;
+		    if(n<0)
+		      negative_number=true;
+		    n = abs(n);
+		    long long low =0,high = min(n,1000000LL),mid;
+		    while(low<=high)
+		    {
+		        mid = low + (high-low)/2;
+		        if(mid*mid*mid==n)
+		        {
+		            if(negative_number==true)
+		              return -1LL*mid;
+		            else
+		              return mid;
+		        }
+		        else if(mid*mid*mid<n)
+		          low = mid+1;
+		        else
+		          high = mid-1;
+		    }
+		   return -1;
+		}
+};
