@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll find(vector<ll> &v, ll mid)
+{
+    ll ans = 0;
+    for(auto i:v)
+    {
+        ans += ceil((double)i/mid);
+    }
+    return ans;
+}
+ll solve(vector<ll> &v, ll H)
+{
+    ll low = 1, high = 1000000000,mid,ans=0;
+    while(low<=high)
+    {
+        mid = low + (high-low)/2;
+        ll TotalTimeTaken = find(v,mid);
+        if(TotalTimeTaken <=H)
+        {
+            high = mid-1;
+        }
+        else
+           low = mid +1;
+    }
+    return low;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,H;
+        cin>>n>>H;
+        vector<ll> v(n);
+        for(int i=0;i<n;i++)
+        {
+            cin>>v[i];
+        }
+        cout<<solve(v,H)<<"\n";
+    }
+    return 0;
+}
