@@ -1,0 +1,22 @@
+class BeingZero{
+	public:
+		long long solve(int arr[], int n)
+        {
+            //int n = sizeof(arr)/sizeof(arr[0]);
+            
+            long long ans = 0;
+            for(int i=0;i<32;i++)
+            {
+                long long c_0 = 0, c_1 =0;
+                for(long long j=0;j<n;j++)
+                {
+                    if(arr[j] & (1<<i))
+                     c_1++;
+                    else
+                     c_0++;
+                }
+                ans += c_1*c_0;
+            }
+            return ans;
+        }
+};
