@@ -1,21 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-void solve(vector<int> &v)
+void solve(vector<int> &a)
 {
-    ll n = v.size(),c=0;
-    for(int i=0;i<=n-2;i++)
+    ll n = a.size();
+    for(int i=1;i<n;i++)
     {
-        for(int j=0;j<=n-2-i;j++)
+        int ele = a[i],j=i-1;
+        while(j>=0 && a[j]>ele)
         {
-            if(v[j]>v[j+1])
-            {
-                swap(v[j],v[j+1]);
-                c++;
-            }
+            a[j+1]=a[j];
+            j--;
         }
+        cout << (j + 1) << " "; // printing indexing element
+        a[j+1] = ele;
     }
-    cout<<c<<"\n";
+    cout<<"\n";
 }
 int main()
 {
@@ -35,4 +35,5 @@ int main()
         }
         solve(v);
     }
+    return 0;
 }
