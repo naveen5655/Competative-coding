@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll; 
+void solve(vector<int> &v)
+{
+    vector<int> freq(2001,0);
+    for(auto i:v)
+    {
+        freq[i+1000]++;
+    }
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq; // distace
+    for(int i=0;i<=2000;i++)
+    {
+        if(freq[i]!=0)
+        {
+            pq.push({freq[i],i-1000});
+        }
+    }
+    while(!pq.empty())
+    {
+        ll f = pq.top().first;
+        ll ele = pq.top().second;
+        pq.pop();
+        for(int i=0;i<f;i++)
+        {
+            cout<<ele<<" ";
+        }
+        
+    }
+    cout<<"\n";
+}
+int main()
+{
+   ios_base::sync_with_stdio(0);
+   cin.tie(0);
+   cout.tie(0);
+   ll t;
+   cin>>t;
+   while(t--)
+   {
+       ll n;
+       cin>>n;
+       vector<int> v(n);
+       for(int i=0;i<n;i++)
+       {
+           cin>>v[i];
+       }
+       solve(v);
+   }
+}
