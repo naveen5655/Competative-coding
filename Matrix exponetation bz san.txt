@@ -1,0 +1,42 @@
+typedef long long ll;
+ll m = (ll) 1e9+7;
+class BeingZero {
+public:
+    vector<vector<int>> identityMatrix(int n) {
+        vector<vector<int>> v(n, vector<int>(n, 0));
+        for (int i = 0; i < n; i++) {
+            v[i][i] = 1;
+        }
+        return v;
+    }
+
+    vector<vector<int>> matrixMultiplication(vector<vector<int>> a, vector<vector<int>> b) {
+        ll r1 = a.size();
+        ll c1 = a[0].size();
+        ll r2 = b.size();
+        ll c2 = b[0].size();
+        vector<vector<int>> ans(r1, vector<int>(c2,0));
+        if(c1!=c2)
+            return ans;
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k = 0; k < c1; k++) {
+                    ans[i][j] = (ans[i][j]%m +(a[i][k]%m * b[k][j]%m)%m)%m;
+                }
+            }
+        }
+        return ans;
+    }
+
+    vector<vector<int>> solve(int n, int m, vector<vector<int>> a) {
+        // n=power, m = size,a -2d matrix
+        if (n == 0)
+            return identityMatrix(m);
+        vector<vector<int>> hf = solve(n/2, m, a);
+        vector<vector<int>> sq = matrixMultiplication(hf, hf);
+        if (n % 2 == 0)
+            return sq;
+        else
+            return matrixMultiplication(sq, a);
+    }
+};
