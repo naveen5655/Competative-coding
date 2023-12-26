@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+typedef long long ll;
+
+bool isPower(ll n) {
+    if (n <= 1) return false;
+
+    for (int a = 2; a * a <= n; a++) {
+        ll temp = n;
+        int b = 0;
+
+        while (temp % a == 0) {
+            temp /= a;
+            b++;
+        }
+
+        if (temp == 1 && b > 1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void solve(ll n) {
+    if (isPower(n))
+        cout << "Yes\n";
+    else
+        cout << "No\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    ll t;
+    cin >> t;
+
+    while (t--) {
+        ll n;
+        cin >> n;
+        solve(n);
+    }
+
+    return 0;
+}
