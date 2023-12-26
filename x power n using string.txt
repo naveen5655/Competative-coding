@@ -1,0 +1,50 @@
+
+Constraints
+1 <= T <= 100000
+
+1 <= len(X) <= 1000000
+
+0 <= N <= 1000000
+------------------------------------->
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll power(ll x, ll y) {
+    ll result = 1;
+    x = x % 10;
+
+    while (y > 0) {
+        if (y % 2 == 1)
+            result = (result * x) % 10;
+
+        y = y / 2;
+        x = (x * x) % 10;
+    }
+
+    return result;
+}
+
+void solve(string x, ll y) {
+    ll lastDigitX = x[x.size() - 1] - '0';
+    cout << power(lastDigitX, y) << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    ll t;
+    cin >> t;
+
+    while (t--) {
+        string x;
+        ll y;
+        cin >> x >> y;
+        solve(x, y);
+    }
+
+    return 0;
+}
