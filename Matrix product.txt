@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+void solve(vector<vector<int>> &v1, vector<vector<int>> &v2)
+{
+    ll r1 = v1.size();
+    ll c1 = v1[0].size();
+    ll r2 = v2.size();
+    ll c2 = v2[0].size();
+    vector<vector<int>> a(r1,vector<int> (c2,0));
+    for(int i=0;i<r1;i++)
+    {
+        for(int j=0;j<c2;j++)
+        {
+            for(int k=0;k<r2;k++)
+            {
+                a[i][j] += v1[i][k]*v2[k][j];
+            }
+        }
+    }
+    for(int i=0;i<r1;i++)
+    {
+        for(int j=0;j<c2;j++)
+        {
+            cout<<a[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+         ll r1,c1;
+         cin>>r1>>c1;
+         vector<vector<int>> v1(r1,vector<int> (c1,0));
+         for(int i=0;i<r1;i++)
+         {
+             for(int j=0;j<c1;j++)
+             {
+                 cin>>v1[i][j];
+             }
+         }
+        ll r2,c2;
+        cin>>r2>>c2;
+         vector<vector<int>> v2(r2,vector<int> (c2,0));
+         for(int i=0;i<r2;i++)
+         {
+             for(int j=0;j<c2;j++)
+             {
+                 cin>>v2[i][j];
+             }
+         }
+         solve(v1,v2);
+        
+    }
+    return 0;
+}
