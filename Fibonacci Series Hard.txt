@@ -1,0 +1,47 @@
+typedef long long ll;
+const ll m = 1000000007;  // (ll)1e9 + 7
+
+class BeingZero {
+public:
+    vector<vector<ll>> identityMatrix(int n) {
+        vector<vector<ll>> v(n, vector<ll>(n, 0));
+        for (int i = 0; i < n; i++) {
+            v[i][i] = 1;
+        }
+        return v;
+    }
+
+    vector<vector<ll>> matrixMultiplication(vector<vector<ll>> a, vector<vector<ll>> b) {
+        int r1 = a.size(), c1 = a[0].size(), r2 = b.size(), c2 = b[0].size();
+        vector<vector<ll>> ans(r1, vector<ll>(c2, 0));
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k = 0; k < c1; k++) {
+                    ans[i][j] = (ans[i][j] % m + (a[i][k] % m * b[k][j] % m) % m) % m;
+                }
+            }
+        }
+        return ans;
+    }
+
+    vector<vector<ll>> fastMatPow(vector<vector<ll>>& base, ll expo) {
+        if (expo == 0)
+            return identityMatrix(base.size());
+        vector<vector<ll>> hf = fastMatPow(base, expo / 2);
+        vector<vector<ll>> sq = matrixMultiplication(hf, hf);
+        if (expo % 2 == 0)
+            return sq;
+        else
+            return matrixMultiplication(sq, base);
+    }
+
+    ll solve(ll n) {
+        if (n <=1)
+        return n;
+        vector<vector<ll>> base = {{1, 1}, {1, 0}};
+      vector<vector<ll>> res = {{1}, {0}};
+        auto result = fastMatPow(base, n-1);
+        auto r = matrixMultiplication(result, res);
+        return r[0][0] % m;
+    }
+};
