@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class BSTNode{
+	public:
+		int data;
+		BSTNode *left, *right;
+		BSTNode(int d){
+			data = d;
+			left = right = NULL;
+		}
+};
+class BeingZero {
+public:
+    vector<int> getZigZagLevel(BSTNode* root) {
+        vector<int> ans;
+        if(root==NULL)
+         return ans;
+        queue<BSTNode*> q;
+        int lr =  1;
+        q.push(root);
+        while(!q.empty())
+        {
+            int n = q.size();
+            vector<int> v(n);
+            for(int i=0;i<n;i++)
+            {
+               auto node = q.front();
+               q.pop();
+               v[i]=node->data;
+                if(node->left!=NULL)
+                 q.push(node->left);
+                if(node->right!=NULL)
+                 q.push(node->right);
+            }
+            if(lr==1)
+            reverse(v.begin(),v.end());
+            // Append the current level to ans
+            for (int i = 0; i < n; i++) {
+                ans.push_back(v[i]);
+            }
+            lr = !lr;
+        }
+        return ans;
+    }
+};
