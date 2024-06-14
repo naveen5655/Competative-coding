@@ -1,0 +1,96 @@
+// All
+#include <bits/stdc++.h>
+using namespace std;
+vector<double> solution(vector<int> &v)
+{
+    priority_queue<int> mxpq;
+    priority_queue<int,vector<int>,greater<int>> mnpq;
+    double ans = 0.0;
+    vector<double> d;
+    for(auto i:v)
+    {
+        if(i<=ans)
+        {
+            mxpq.push(i);
+            if(mxpq.size()>mnpq.size()+1)
+            {
+                mnpq.push(mxpq.top());
+                mxpq.pop();
+            }
+        }
+        else
+        {
+            mnpq.push(i);
+            if(mnpq.size()>mxpq.size()+1)
+            {
+                mxpq.push(mnpq.top());
+                mnpq.pop();
+            }
+        }
+        if(mxpq.size()==mnpq.size())
+          ans = (mxpq.top()+mnpq.top())/2.0;
+        else if(mxpq.size()>mnpq.size())
+          ans = mxpq.top();
+        else
+          ans = mnpq.top();
+        d.push_back(ans);
+    }
+    return d;
+}
+int main() {
+	int n;
+	cin>>n;
+	vector<int> v(n);
+	for(int i=0;i<n;i++)
+	{
+	    cin>>v[i];
+	}
+	vector<double> a= solution(v);
+	for(auto i:a)
+	{
+	    cout<<i<<" ";
+	}
+
+}
+
+
+/// Leetcode 295
+class MedianFinder {
+public:
+    priority_queue<int> mxpq;
+    priority_queue<int,vector<int>,greater<int>> mnpq;
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        if(mxpq.empty() || num<mxpq.top())
+          mxpq.push(num);
+        else
+         mnpq.push(num);
+        
+        // Reblanace
+        if(mxpq.size()>mnpq.size()+1)
+        {
+            mnpq.push(mxpq.top());
+            mxpq.pop();
+        }
+        else if(mnpq.size()>mxpq.size()+1)
+        {
+            mxpq.push(mnpq.top());
+            mnpq.pop();
+        }
+        
+    }
+    
+    double findMedian() {
+        double ans = 0.0;
+        if(mxpq.size()==mnpq.size())
+          ans = (mxpq.top()+mnpq.top())/2.0;
+        else if (mxpq.size()>mnpq.size())
+           ans = mxpq.top();
+        else
+          ans = mnpq.top();
+        return ans;
+    }
+};
