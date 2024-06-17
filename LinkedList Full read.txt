@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct LLNode
+{
+    int data;
+    LLNode* next;
+    LLNode(int x)
+    {
+        data = x;
+        next = NULL;
+    }
+};
+
+LLNode* add(LLNode* head, int val)
+{
+    LLNode* nn = new LLNode(val);
+    if(head==NULL)
+     return nn;
+    LLNode *curr = head;
+    while(curr->next != NULL)
+    {
+        curr = curr->next;
+    }
+    curr->next = nn;
+    return head;
+}
+
+void display(LLNode* head)
+{
+    LLNode* curr= head;
+    while(curr!=NULL)
+    {
+        cout<<curr->data<<" ";
+        curr = curr->next;
+    }
+}
+
+int main() {
+	int n;
+	cin>>n;
+	LLNode* h1=NULL;
+	int x;
+	while(n--)
+	{
+	    cin>>x;
+	    h1 = add(h1,x);
+	}
+    display(h1);
+}
