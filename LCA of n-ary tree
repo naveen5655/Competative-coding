@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+    int data;
+    vector<Node*> children;
+    Node(int x)
+    {
+        data = x;
+    }
+};
+
+Node* lowestCommonAncestor(Node* root, Node* p, Node* q) 
+{
+    if(root==NULL || root==p || root==q)
+     return root;
+    Node* lca = NULL;
+    int c = 0;
+    for(auto child: root->children)
+    {
+        auto templca =  lowestCommonAncestor(child,p,q);
+        if(templca!=NULL)
+        {
+            c++;
+            lca = templca;
+        }
+        if(c==2)
+         return root;
+    }
+    return lca;
+}
+
+int main()
+{
+    Node* root = new Node(1);
+    Node* n2 = new Node(2);
+    Node* n3 = new Node(3);
+    Node* n4 = new Node(4);
+    Node* n5 = new Node(5);
+    Node* n6 = new Node(6);
+    
+    root-> children = {n2,n3,n4};
+    n4->children = {n5,n6};
+    
+    auto lca = lowestCommonAncestor(root,n5,n6);
+    cout<<lca->data<<"\n";
+    
+}
