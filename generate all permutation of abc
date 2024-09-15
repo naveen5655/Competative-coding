@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(string &s, 	vector<string> &ans, int index)
+{
+    if(index==s.size())
+    {
+        ans.push_back(s);
+        return;
+    }
+    for(int i=index;i<s.size();i++)
+    {
+        swap(s[index],s[i]);
+        solve(s,ans,index+1);
+        swap(s[index],s[i]);
+    }
+}
+int main() {
+	string s = "abc";
+	vector<string> ans;
+	solve(s,ans,0);
+	for(auto i:ans)
+	{
+	    cout<<i<<" ";
+	}
+
+}
+
+
+/* output:
+
+abc acb bac bca cba cab 
+*/
