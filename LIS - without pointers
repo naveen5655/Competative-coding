@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int lb(vector<int> &v, int key)
+    {
+        int n = v.size();
+        int low = 0, high = n-1, mid;
+        while(low<=high)
+        {
+            mid = low + (high-low)/2;
+            if(v[mid]<key)
+            {
+
+                low = mid + 1;
+            }
+            else
+               high = mid-1;
+        }
+        return low;
+    }
+    int lengthOfLIS(vector<int>& v) {
+        int n = v.size();
+        if(n==0)
+         return 0;
+        vector<int> dp;
+        for(int i=0;i<n;i++)
+        {
+            int j = lb(dp,v[i]);
+            if(j==dp.size())
+             dp.push_back(v[i]);
+            else
+             dp[j] = v[i];
+        }
+        return dp.size();
+        
+    }
+};
