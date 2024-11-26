@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void bellmanFord(int V, vector<vector<int>>& edges, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    // Relax edges V-1 times
+    for (int i = 0; i < V - 1; i++) {
+        for (int j = 0; j < edges.size(); j++) {
+            int u = edges[j][0], v = edges[j][1], weight = edges[j][2];
+            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+            }
+        }
+    }
+
+    // Check for negative-weight cycles
+    for (int i = 0; i < edges.size(); i++) {
+        int u = edges[i][0], v = edges[i][1], weight = edges[i][2];
+        if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+            cout << "Graph contains a negative-weight cycle\n";
+            return;
+        }
+    }
+
+    
+    for (int i = 0; i < V; i++) {
+        cout << "Distance from " << src << " to " << i << " is ";
+        if (dist[i] == INT_MAX) 
+            cout << "INF\n";
+        else 
+            cout << dist[i] << "\n";
+    }
+}
+
+int main() {
+    int V, E;
+    cin >> V >> E;
+
+    vector<vector<int>> edges(E, vector<int>(3));
+    for (int i = 0; i < E; i++) {
+        cin >> edges[i][0] >> edges[i][1] >> edges[i][2];
+    }
+
+    int src;
+    cin >> src;
+
+    bellmanFord(V, edges, src);
+
+    return 0;
+}
+
+/ *
+
+3 3
+1 2 100
+2 3 -80
+3 1 -30
+1
+
+output: Graph contains a negative-weight cycle
+
+
+*/
